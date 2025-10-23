@@ -1,9 +1,10 @@
 /**
- * Define a estrutura de dados para um feitiço,
- * conforme retornado pela HP-API.
+ * Atributos específicos para um Feitiço (Spell).
  */
-export interface Spell {
-  id: string;
+export interface SpellAttributes {
   name: string;
-  description: string;
+  slug: string;
+  image: string | null;
+  effect: string | null;
+  incantation: string | null;
 }

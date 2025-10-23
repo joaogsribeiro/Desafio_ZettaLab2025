@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HpApi } from './hp-api';
+import { PotterdbApi } from './potterdb-api';
 
-describe('HpApi', () => {
-  let service: HpApi;
+describe('PotterdbApi', () => {
+  let service: PotterdbApi;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HpApi);
+    service = TestBed.inject(PotterdbApi);
   });
 
   it('should be created', () => {

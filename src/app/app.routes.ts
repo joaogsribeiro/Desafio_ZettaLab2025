@@ -1,37 +1,32 @@
 import { Routes } from '@angular/router';
 
-// Importação dos componentes "Página" que serão roteados
+import { Books } from '../pages/books/books';
 import { CharacterDetail } from '../pages/character-detail/character-detail';
 import { Characters } from '../pages/characters/characters';
 import { Home } from '../pages/home/home';
-import { House } from '../pages/house/house';
+import { Movies } from '../pages/movies/movies';
+import { Potions } from '../pages/potions/potions';
 import { Spells } from '../pages/spells/spells';
 
 /**
- * Define as rotas principais da aplicação.
- * Cada rota mapeia uma URL (path) para um componente específico.
+ * Define as rotas principais da aplicação, agora focadas na API PotterDB.
  */
 export const routes: Routes = [
   // Rota principal (página inicial)
   { path: '', component: Home },
 
-  // --- Rotas de Listagem ---
-  { path: 'characters', component: Characters },
-  { path: 'spells', component: Spells },
+  // --- Rotas com Funcionalidades ---
+  { path: 'characters', component: Characters }, // Página curada + Busca
+  { path: 'spells', component: Spells },         // Lista + Busca
+  { path: 'potions', component: Potions },       // Lista + Busca
+  
+  // --- Rotas de Listagem Simples ---
+  { path: 'books', component: Books },           
+  { path: 'movies', component: Movies },         
 
-  // --- Rotas Dinâmicas (com parâmetros na URL) ---
-
-  /** Rota de detalhe: Carrega um personagem específico por seu ':id'. */
+  // --- Rota de Detalhe ---
   { path: 'character/:id', component: CharacterDetail },
 
-  /** Rota de filtro: Carrega personagens filtrados por ':houseName' (ex: /house/gryffindor). */
-  { path: 'house/:houseName', component: House },
-
   // --- Rota "Catch-all" (Not Found) ---
-  /**
-   * Redireciona qualquer URL desconhecida (que não deu "match" com as rotas acima)
-   * para a página inicial ('').
-   * 'pathMatch: full' é necessário para rotas de redirecionamento.
-   */
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
