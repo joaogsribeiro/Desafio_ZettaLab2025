@@ -7,76 +7,34 @@
       type="text" 
       class="form-control form-control-lg"
       placeholder="Buscar por nome (ex: 'Malfoy' ou 'Luna')..."
-      [formControl]="searchControl"> </div>
-
-  <div *ngIf="isLoading" class="text-center mt-5">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Carregando...</span>
-    </div>
+      [formControl]="searchControl">
   </div>
 
-  <div *ngIf="error && !isLoading" class="alert alert-danger mt-4">
-    {{ error }}
-  </div>
+  <div *ngIf="isLoading" class="text-center mt-5">...</div>
+  <div *ngIf="error && !isLoading" class="alert alert-danger mt-4">...</div>
 
   <div *ngIf="!isLoading && !error">
 
     <div *ngIf="!isSearching">
       <h3 class="mb-3">Personagens Principais</h3>
-      
-      <div *ngIf="initialCharacters.length === 0" class="alert alert-warning">
-        Nenhum personagem principal foi encontrado.
-      </div>
-
+      <div *ngIf="initialCharacters.length === 0" class="alert alert-warning">...</div>
       <div class="row">
         <div *ngFor="let char of initialCharacters" class="col-12 col-md-6 col-lg-4 mb-4">
           
-          <div class="card h-100">
-            <div *ngIf="char.attributes.image; else noImage">
-              <img [src]="char.attributes.image" class="card-img-top" [alt]="char.attributes.name">
-            </div>
-            <ng-template #noImage>
-              <div class="card-img-top character-image-placeholder">
-                <span>{{ getInitials(char.attributes.name) }}</span>
-              </div>
-            </ng-template>
-            <div class="card-body">
-              <h5 class="card-title">{{ char.attributes.name }}</h5>
-              <p class="card-text">Casa: {{ char.attributes.house || 'N/A' }}</p>
-              <a [routerLink]="['/character', char.id]" class="btn btn-primary">Ver Detalhes</a>
-            </div>
-          </div>
-          
+          <app-character-card [char]="char"></app-character-card>
+
         </div>
       </div>
     </div>
 
     <div *ngIf="isSearching">
       <h3 class="mb-3">Resultados da Busca para: "{{ searchControl.value }}"</h3>
-
-      <div *ngIf="searchedCharacters.length === 0" class="alert alert-info">
-        Nenhum personagem encontrado. (A API filtrou resultados sem imagem)
-      </div>
-      
+      <div *ngIf="searchedCharacters.length === 0" class="alert alert-info">...</div>
       <div class="row">
         <div *ngFor="let char of searchedCharacters" class="col-12 col-md-6 col-lg-4 mb-4">
           
-          <div class="card h-100">
-            <div *ngIf="char.attributes.image; else noImage">
-              <img [src]="char.attributes.image" class="card-img-top" [alt]="char.attributes.name">
-            </div>
-            <ng-template #noImage>
-              <div class="card-img-top character-image-placeholder">
-                <span>{{ getInitials(char.attributes.name) }}</span>
-              </div>
-            </ng-template>
-            <div class="card-body">
-              <h5 class="card-title">{{ char.attributes.name }}</h5>
-              <p class="card-text">Casa: {{ char.attributes.house || 'N/A' }}</p>
-              <a [routerLink]="['/character', char.id]" class="btn btn-primary">Ver Detalhes</a>
-            </div>
-          </div>
-          
+          <app-character-card [char]="char"></app-character-card>
+
         </div>
       </div>
     </div>

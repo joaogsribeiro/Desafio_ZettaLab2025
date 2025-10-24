@@ -1,0 +1,24 @@
+/* Estilo para o placeholder de imagem */
+.character-image-placeholder {
+  height: 300px; 
+  background-color: #343a40; /* Mude para sua cor de tema */
+  color: #fff; 
+  
+  /* Centraliza o ícone */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; // Garante que o ícone não estoure
+
+  /* Ajusta o arredondamento */
+  border-top-left-radius: var(--bs-card-inner-border-radius);
+  border-top-right-radius: var(--bs-card-inner-border-radius);
+}
+
+/* Classe para o ícone dentro do placeholder */
+.placeholder-icon {
+  width: 50%; // Ajuste o tamanho do ícone
+  height: auto;
+  opacity: 0.5; // Deixa o ícone mais sutil
+  filter: invert(1); // Se o seu ícone for preto, isso o tornará branco
+}

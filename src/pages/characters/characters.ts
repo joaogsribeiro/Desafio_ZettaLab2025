@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 // Importa operadores reativos do RxJS
 import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 // Importa modelos e o serviço
 import { CharacterAttributes, PotterDbData } from '../../models/character.model';
 import { PotterdbApi } from '../../services/potterdb-api';
+
+// 1. IMPORTE O NOVO COMPONENTE
+import { CharacterCard } from '../../components/character-card/character-card';
 
 /**
  * Componente da página de Personagens.
@@ -19,8 +21,8 @@ import { PotterdbApi } from '../../services/potterdb-api';
   standalone: true,
   imports: [
     CommonModule,         // Para diretivas *ngIf, *ngFor
-    RouterLink,           // Para a diretiva [routerLink]
-    ReactiveFormsModule   // Para a barra de busca [formControl]
+    ReactiveFormsModule,  // Para a barra de busca [formControl]
+    CharacterCard         // 2. ADICIONE O NOVO COMPONENTE AOS IMPORTS
   ],
   templateUrl: './characters.html',
   styleUrl: './characters.scss'
@@ -132,20 +134,5 @@ export class Characters implements OnInit {
         console.error(err);
       }
     });
-  }
-
-  /**
-   * Gera iniciais de um nome para usar no placeholder da imagem.
-   * @param name O nome do personagem (ex: "Harry Potter")
-   * @returns As iniciais (ex: "HP")
-   */
-  public getInitials(name: string): string {
-    if (!name) return '??';
-    const names = name.split(' ');
-    let initials = names[0].substring(0, 1).toUpperCase();
-    if (names.length > 1) {
-      initials += names[names.length - 1].substring(0, 1).toUpperCase();
-    }
-    return initials;
   }
 }

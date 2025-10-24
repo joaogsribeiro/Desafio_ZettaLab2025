@@ -1,0 +1,19 @@
+<div class="card h-100">
+  <div *ngIf="char.attributes.image; else noImage">
+    <img [src]="char.attributes.image" class="card-img-top" [alt]="char.attributes.name">
+  </div>
+  
+  <ng-template #noImage>
+    <div class="card-img-top character-image-placeholder">
+      <img src="icons/placeholder-hat.svg" 
+           class="placeholder-icon" 
+           alt="Placeholder">
+    </div>
+  </ng-template>
+
+  <div class="card-body">
+    <h5 class="card-title">{{ char.attributes.name }}</h5>
+    <p class="card-text">Casa: {{ char.attributes.house || 'N/A' }}</p>
+    <a [routerLink]="['/character', char.id]" class="btn btn-primary">Ver Detalhes</a>
+  </div>
+</div>
