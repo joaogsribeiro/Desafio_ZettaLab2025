@@ -14,8 +14,8 @@
     />
   </div>
 
-  <div *ngIf="isLoading" class="text-center mt-5">...</div>
-  <div *ngIf="error && !isLoading" class="alert alert-danger mt-4">...</div>
+  <div *ngIf="isLoading" class="text-center mt-5">. . .</div>
+  <div *ngIf="error && !isLoading" class="alert alert-danger mt-4">. . .</div>
 
   <div *ngIf="!isLoading && !error">
     <div *ngIf="!isSearching">
@@ -25,7 +25,7 @@
         <img src="icons/subtitle-symbol.svg" alt="" class="subtitle-icon right-icon" />
       </div>
 
-      <div *ngIf="initialCharacters.length === 0" class="alert alert-warning">...</div>
+      <div *ngIf="initialCharacters.length === 0" class="alert alert-warning">. . .</div>
       <div class="row">
         <div *ngFor="let char of initialCharacters" class="col-12 col-md-6 col-lg-3 mb-4">
           <app-character-card [char]="char"></app-character-card>
@@ -35,7 +35,7 @@
 
     <div *ngIf="isSearching">
       <h3 class="mb-3" style="font-size: 1.2rem">Resultados da Busca para: "{{ searchControl.value }}"</h3>
-      <div *ngIf="searchedCharacters.length === 0" class="alert alert-info">...</div>
+      <div *ngIf="searchedCharacters.length === 0" class="alert alert-info">Nenhum personagem encontrado para sua busca.</div>
       <div class="row">
         <div *ngFor="let char of searchedCharacters" class="col-12 col-md-6 col-lg-3 mb-4">
           <app-character-card [char]="char"></app-character-card>

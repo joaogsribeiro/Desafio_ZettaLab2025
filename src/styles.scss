@@ -4,7 +4,7 @@
    1. Fontes Externas
    ======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap');
 
 /* ========================================
    2. Variáveis Globais (Guia de Estilo)
@@ -22,7 +22,7 @@ $color-muted-text: #aaa;      // Texto secundário
 
 // -- Tipografia --
 $font-headings: 'Cinzel', serif; // Fonte para títulos
-$font-body: 'Roboto', sans-serif;      // Fonte para corpo
+$font-body: 'Lexend', sans-serif;      // Fonte para corpo
 
 /* ========================================
    3. Estilos Globais Base
@@ -125,21 +125,76 @@ a {
 }
 
 // Campo de Input (Tema Escuro)
-.form-control { 
+// ... (rest of your styles.scss)
+
+.form-control { // Input escuro
   font-size: 1rem;
-  background-color: color.adjust($color-dark-bg, $lightness: 5%); 
+  background-color: color.adjust($color-dark-bg, $lightness: 5%);
   border-color: $color-dark-border;
-  color: $color-light-text;
+  color: $color-light-text; // Icon will inherit this light color
 
-  &::placeholder { 
+  // --- Ícone no Input ---
+  background-image: url('/icons/search-icon.svg'); // Path to your SVG in public/icons
+  background-repeat: no-repeat;
+  background-position: left 15px center; // Position from left, centered vertically
+  background-size: 16px 16px; // Size of the icon
+  padding-left: 40px; // Space for the icon + padding
+  // --- Fim do Ícone ---
+
+  &::placeholder {
     color: $color-muted-text;
-    font-size: 1rem; 
+    font-size: 1rem;
+    // Adjust placeholder padding if needed, relative to the main padding-left
+    // padding-left: 5px; 
   }
 
-  &:focus { 
-    background-color: color.adjust($color-dark-bg, $lightness: 10%); 
-    border-color: $color-gryffindor; // Destaque ao focar
-    color: $color-light-text;
-    box-shadow: 0 0 0 0.25rem rgba($color-gryffindor, 0.25); 
+  &:focus {
+    background-color: color.adjust($color-dark-bg, $lightness: 10%);
+    border-color: $color-gryffindor;
+    color: $color-light-text; // Icon color remains light on focus
+    box-shadow: 0 0 0 0.25rem rgba($color-gryffindor, 0.25);
   }
+}
+
+/* ========================================
+   6. Sobrescrita Alertas Bootstrap
+   ======================================== */
+.alert {
+  // Estilo base para todos os alertas no tema escuro
+  background-color: $color-dark-card;
+  border-color: $color-dark-border;
+  color: $color-muted-text;
+
+  // Estilo específico para alert-info
+  &.alert-info {
+    border-left: 4px solid $color-gryffindor;
+    color: $color-light-text;
+  }
+
+  // Estilo para .alert-warning
+  &.alert-warning {
+     border-left: 4px solid $color-hufflepuff; 
+     color: $color-hufflepuff;
+  }
+}
+
+/* ========================================
+   Sticky Footer (Correção de Posição)
+   ======================================== */
+
+// Aplica ao container raiz da aplicação Angular
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Estilo para o container principal do conteúdo
+.main-content {
+  flex-grow: 1; 
+}
+
+// Garante que header e footer não encolham
+app-header, app-footer {
+  flex-shrink: 0; 
 }
