@@ -24,8 +24,7 @@ export interface CharacterAttributes {
   name: string;
   image: string | null;
   house: string | null;
-  slug: string; // Importante para nossa busca
-  // Adicione outros campos que queira exibir na página de detalhes
+  slug: string; // Importante para a busca
   born: string | null;
   died: string | null;
   gender: string | null;

@@ -1,0 +1,43 @@
+// Importa variáveis globais com namespace 'theme'
+@use '../../styles.scss' as theme;
+
+// Estilo container principal do cabeçalho
+.app-header {
+  background-color: theme.$color-dark-card; // Fundo escuro (card)
+  border-bottom: 1px solid theme.$color-dark-border; // Linha inferior
+
+  // Estilo da marca/logo
+  .navbar-brand {
+    font-family: theme.$font-headings;
+    font-size: 1.5rem;
+    color: theme.$color-light-text; // Cor clara
+    font-weight: 700;
+  }
+
+  // Estilo dos links de navegação
+  .nav-link {
+    font-family: theme.$font-body;
+    font-weight: 500;
+    color: theme.$color-muted-text; // Cor secundária
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: theme.$color-light-text; // Cor primária no hover
+    }
+
+    // Estilo do link ativo
+    &.active {
+      color: theme.$color-light-text;
+      border-bottom: 2px solid theme.$color-gryffindor; // Linha Gryffindor
+    }
+  }
+
+  // Estilos botão "hamburguer" (mobile)
+  .navbar-toggler {
+    border-color: rgba(theme.$color-light-text, 0.3); 
+  }
+  .navbar-toggler-icon {
+    // Ícone SVG claro embutido
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(240, 240, 240, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+}

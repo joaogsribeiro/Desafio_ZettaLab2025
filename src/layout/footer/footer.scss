@@ -1,0 +1,22 @@
+// Importa variáveis globais e módulo de cor
+@use '../../styles.scss' as theme;
+@use "sass:color";
+
+// Estilo container principal do rodapé
+.app-footer {
+  background-color: theme.$color-dark-card; // Fundo escuro (card)
+  border-top: 1px solid theme.$color-dark-border; // Linha superior
+  color: theme.$color-muted-text; // Texto secundário
+  font-size: 0.9rem; // Fonte menor
+
+  // Estilo links no rodapé
+  a {
+    color: theme.$color-hufflepuff; // Cor de destaque
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: color.adjust(theme.$color-hufflepuff, $lightness: 15%); // Clareia no hover
+    }
+  }
+}

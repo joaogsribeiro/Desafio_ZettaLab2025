@@ -1,1 +1,32 @@
-<p>header works!</p>
+<header class="app-header sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-dark shadow-sm">
+    <div class="container">
+      
+      <a class="navbar-brand" routerLink="/"><img src="images/logo-vertical.svg" alt="Lumos Data" height="40"></a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/characters" routerLinkActive="active">Personagens</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/spells" routerLinkActive="active">Feitiços</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/potions" routerLinkActive="active">Poções</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/books" routerLinkActive="active">Livros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/movies" routerLinkActive="active">Filmes</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

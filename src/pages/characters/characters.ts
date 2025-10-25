@@ -1,137 +1,95 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-// Importa operadores reativos do RxJS
-import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-// Importa modelos e o serviço
-import { CharacterAttributes, PotterDbData } from '../../models/character.model';
-import { PotterdbApi } from '../../services/potterdb-api';
-
-// 1. IMPORTE O NOVO COMPONENTE
-import { CharacterCard } from '../../components/character-card/character-card';
+import { debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators'; // Operadores RxJS
+import { CharacterAttributes, PotterDbData } from '../../models/character.model'; // Modelos
+import { PotterdbApi } from '../../services/potterdb-api'; // Serviço API
+import { CharacterCard } from '../../components/character-card/character-card'; // Componente Card
 
 /**
  * Componente da página de Personagens.
- * Gerencia dois estados:
- * 1. A exibição da lista curada de personagens principais.
- * 2. A exibição dos resultados de uma busca em tempo real.
+ * Exibe uma lista curada inicial e permite busca em tempo real na API.
  */
 @Component({
   selector: 'app-characters',
   standalone: true,
-  imports: [
-    CommonModule,         // Para diretivas *ngIf, *ngFor
-    ReactiveFormsModule,  // Para a barra de busca [formControl]
-    CharacterCard         // 2. ADICIONE O NOVO COMPONENTE AOS IMPORTS
-  ],
+  imports: [ CommonModule, ReactiveFormsModule, CharacterCard ], // Módulos e Componentes necessários
   templateUrl: './characters.html',
   styleUrl: './characters.scss'
 })
 export class Characters implements OnInit {
 
-  // --- Propriedades de Estado ---
-  /** Controla a exibição do spinner de carregamento */
-  public isLoading = true;
-  /** Armazena a mensagem de erro, se houver */
-  public error: string | null = null;
-  /** Flag que controla qual view mostrar: 'true' (busca) ou 'false' (lista curada) */
-  public isSearching = false; 
+  // --- Estado da UI ---
+  public isLoading = true; // Controla o spinner
+  public error: string | null = null; // Mensagem de erro
+  public isSearching = false; // Controla qual lista exibir (inicial ou busca)
   
-  /** Controle do Angular Forms para a barra de busca */
+  /** FormControl para o input de busca. */
   public searchControl = new FormControl('');
   
-  // --- Fontes de Dados ---
-  /** Armazena a lista curada de 12 personagens (do 'forkJoin') */
+  // --- Dados ---
+  /** Lista inicial de personagens principais. */
   public initialCharacters: PotterDbData<CharacterAttributes>[] = [];
-  /** Armazena os resultados da API de busca */
+  /** Lista de resultados da busca na API. */
   public searchedCharacters: PotterDbData<CharacterAttributes>[] = [];
 
-  constructor(private potterdbApi: PotterdbApi) {}
+  constructor(private potterdbApi: PotterdbApi) {} // Injeção do serviço da API
 
   /**
-   * Lifecycle Hook do Angular. Chamado quando o componente é inicializado.
+   * Método do ciclo de vida: Executa na inicialização do componente.
    */
   ngOnInit(): void {
-    // Carrega a lista curada ao iniciar a página
-    this.loadInitialCharacters();
-    // Inicia o "ouvinte" da barra de busca
-    this.setupSearchListener();
+    this.loadInitialCharacters(); // Carrega a lista inicial
+    this.setupSearchListener();  // Configura a barra de busca
   }
 
   /**
-   * Busca a lista curada (via forkJoin) do serviço.
+   * Busca a lista curada de personagens via `forkJoin` no serviço.
    */
   loadInitialCharacters(): void {
     this.isLoading = true;
     this.error = null;
-    this.isSearching = false; // Garante que estamos na visão inicial
+    this.isSearching = false;
 
     this.potterdbApi.getImportantCharacters().subscribe({
       next: (charactersArray) => {
-        // O 'getImportantCharacters' já retorna o array "limpo"
         this.initialCharacters = charactersArray;
         this.isLoading = false;
       },
       error: (err) => {
-        this.error = 'Falha ao carregar um ou mais personagens principais.';
+        this.error = 'Falha ao carregar personagens principais.';
         this.isLoading = false;
-        console.error(err);
+        console.error('Erro loadInitialCharacters:', err);
       }
     });
   }
 
   /**
-   * Configura a barra de busca para chamar a API (que agora filtra imagens).
-   * Usa um "pipe" reativo do RxJS para otimizar as chamadas.
+   * Configura o Observable da barra de busca com operadores RxJS
+   * para otimizar as chamadas à API (`debounceTime`, `distinctUntilChanged`, `switchMap`).
    */
   setupSearchListener(): void {
-    // 'valueChanges' é um Observable que emite o valor do input toda vez que ele muda
     this.searchControl.valueChanges.pipe(
-      // 'debounceTime': Aguarda 300ms após o usuário PARAR de digitar
-      debounceTime(300),
-      
-      // 'distinctUntilChanged': Só emite se o novo valor for DIFERENTE do anterior
-      distinctUntilChanged(),
-      
-      // 'tap': "Toca" no fluxo para executar uma ação (mudar o estado)
-      tap(term => {
-        if (term) {
-          // Se há um termo, ativa o modo de busca e o loading
-          this.isSearching = true;
-          this.isLoading = true;
-          this.error = null;
-        } else {
-          // Se o termo for apagado, volta ao modo inicial (lista curada)
-          this.isSearching = false;
-          this.isLoading = false;
-          this.error = null;
-          this.searchedCharacters = []; // Limpa a busca anterior
-        }
+      debounceTime(300), // Aguarda 300ms após parar de digitar
+      distinctUntilChanged(), // Ignora se o valor não mudou
+      tap(term => { // Efeito colateral para atualizar estado da UI
+        this.isSearching = !!term; // Define isSearching baseado na existência de 'term'
+        this.isLoading = !!term; // Ativa loading se houver termo
+        this.error = null;
+        if (!term) this.searchedCharacters = []; // Limpa busca se termo vazio
       }),
-      
-      // 'switchMap': Cancela a chamada de API anterior e "troca" para uma nova
-      switchMap(term => {
-        if (term) {
-          // Se houver termo, chama a API de busca
-          return this.potterdbApi.searchCharacters(term);
-        } else {
-          // Se o termo for vazio, retorna um Observable vazio (não faz chamada)
-          return []; 
-        }
-      })
+      switchMap(term => (term ? this.potterdbApi.searchCharacters(term) : [])) // Chama API ou retorna vazio
     ).subscribe({
       next: (response) => {
-        // Verifica se estamos no modo de busca e se a resposta tem dados
         if (this.isSearching && response.data) {
-          // A API já filtrou os resultados sem imagem
-          this.searchedCharacters = response.data;
+          this.searchedCharacters = response.data; // Atualiza resultados da busca
         }
-        this.isLoading = false;
+        this.isLoading = false; // Desativa loading
       },
       error: (err) => {
         this.error = 'Falha ao realizar a busca na API.';
         this.isLoading = false;
-        console.error(err);
+        console.error('Erro setupSearchListener:', err);
       }
     });
   }
