@@ -1,0 +1,75 @@
+// Importa variáveis globais e módulo de cor
+@use '../../styles.scss' as theme;
+@use "sass:color";
+
+// Estilo container principal do card
+.card {
+  background-color: theme.$color-dark-card;
+  border: 1px solid theme.$color-dark-border;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; // Previne que a imagem estoure
+
+  &:hover {
+    transform: translateY(-5px); // Efeito ao passar o mouse
+    box-shadow: 0 4px 15px rgba(theme.$color-ravenclaw, 0.3); // Sombra temática
+  }
+
+  // Corpo do card
+  .card-body {
+    display: flex; // Habilita flexbox
+    flex-direction: column; // Itens em coluna
+    flex-grow: 1; // Ocupa espaço vertical
+
+    .card-title {
+      color: theme.$color-light-text;
+      font-family: theme.$font-headings; // Fonte Cinzel
+      font-weight: 700;
+      margin-bottom: 0.75rem; // Espaço abaixo do título
+    }
+
+    // Container dos detalhes do feitiço
+    .spell-details {
+      // Estilo para cada item de detalhe (Efeito, Encantamento, etc.)
+      .detail-item {
+        color: theme.$color-muted-text; // Cor secundária para legibilidade
+        font-size: 0.9rem; // Tamanho de fonte consistente para todos os detalhes
+        line-height: 1.5; // Espaçamento entre linhas
+        margin-bottom: 0.3rem; // Pequeno espaço entre cada detalhe
+
+        // Estilo para o texto em negrito (label)
+        strong {
+          color: theme.$color-light-text; // Cor principal para o label
+          font-weight: 500; // Peso médio
+        }
+      }
+    }
+  }
+}
+
+// Imagem no topo do card
+.card-img-top {
+  height: 300px; // Altura da imagem
+  object-fit: cover; // Preenche sem distorcer
+  background-color: theme.$color-dark-bg; // Fundo fallback
+}
+
+// Container do placeholder (quando não há imagem)
+.spell-image-placeholder {
+  height: 300px; // Mesma altura da imagem
+  background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%); // Fundo ligeiramente mais claro
+  display: flex;
+  align-items: center; // Centraliza ícone verticalmente
+  justify-content: center; // Centraliza ícone horizontalmente
+  overflow: hidden;
+  border-bottom: 1px solid theme.$color-dark-border; // Linha sutil
+}
+
+// Ícone SVG dentro do placeholder
+.placeholder-icon {
+  width: 100%; // Tamanho do ícone
+  max-width: 300px;
+  height: auto;
+  opacity: 0.1; // Sutil
+  filter: invert(1); // Branco no tema escuro
+}

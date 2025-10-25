@@ -1,1 +1,57 @@
-<p>spells works!</p>
+<div class="container">
+  <div class="page-title-container mb-4">
+    <img src="icons/title-symbol.svg" alt="" class="title-icon left-icon" />
+    <h1 class="page-title">Feitiços</h1>
+    <img src="icons/title-symbol.svg" alt="" class="title-icon right-icon" />
+  </div>
+
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      placeholder="Buscar feitiço por nome (ex: 'Obliviate' ou 'Incendio')..."
+      [formControl]="searchControl"
+    />
+  </div>
+
+  <div *ngIf="isLoading" class="text-center mt-5 mb-5">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p class="mt-2">Carregando Feitiços...</p>
+  </div>
+
+  <div *ngIf="error && !isLoading" class="alert alert-warning mt-4">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error">
+    <div *ngIf="!isSearching">
+      <div class="page-title-container mb-3">
+        <img src="icons/subtitle-symbol.svg" alt="" class="subtitle-icon left-icon" />
+        <h2 class="page-title" style="font-size: 1.8rem">Feitiços Populares</h2>
+        <img src="icons/subtitle-symbol.svg" alt="" class="subtitle-icon right-icon" />
+      </div>
+
+      <div *ngIf="initialSpells.length === 0" class="alert alert-warning">
+        Nenhum feitiço popular foi carregado.
+      </div>
+      <div class="row">
+        <div *ngFor="let spell of initialSpells" class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+          <app-spell-card [spell]="spell"></app-spell-card>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isSearching">
+      <h3 class="mb-3" style="font-size: 1.2rem">
+        Resultados da Busca para: "{{ searchControl.value }}"
+      </h3>
+      <div class="row">
+        <div *ngFor="let spell of searchedSpells" class="col-12 col-md-6 col-lg-4 col-xl-4 mb-4">
+          <app-spell-card [spell]="spell"></app-spell-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

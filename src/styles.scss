@@ -165,17 +165,12 @@ a {
   border-color: $color-dark-border;
   color: $color-muted-text;
 
-  // Estilo específico para alert-info
-  &.alert-info {
+  // Estilo para alert-info e alert-warning
+  &.alert-info, &.alert-warning {
     border-left: 4px solid $color-gryffindor;
     color: $color-light-text;
   }
 
-  // Estilo para .alert-warning
-  &.alert-warning {
-     border-left: 4px solid $color-hufflepuff; 
-     color: $color-hufflepuff;
-  }
 }
 
 /* ========================================

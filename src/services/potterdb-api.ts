@@ -41,6 +41,25 @@ export class PotterdbApi {
     'ginevra-weasley' // Slug correto para Ginny
   ];
 
+  /**
+   * Lista curada de slugs dos feitiços mais populares/icônicos.
+   * (Você pode ajustar esta lista)
+   */
+  private readonly importantSpellSlugs = [
+    'lumos-maxima',
+    'wand-extinguishing-charm',
+    'summoning-charm',
+    'disarming-charm',
+    'levitation-charm',
+    'unlocking-charm',
+    'patronus-charm',
+    'boggart-banishing-spell',
+    'stunning-spell',
+    'killing-curse',
+    'cruciatus-curse',
+    'imperius-curse'
+  ];
+
   constructor(private http: HttpClient) { }
 
   // --- MÉTODOS DE PERSONAGEM ---
@@ -110,18 +129,44 @@ export class PotterdbApi {
     return this.http.get<PotterDbData<CharacterAttributes>>(`${this.baseUrl}/characters/${id}`);
   }
 
-  // --- MÉTODOS DE OUTRAS ROTAS ---
+// --- MÉTODOS DE FEITIÇO ---
 
   /**
-   * Busca feitiços, paginado ou por termo de pesquisa.
+   * Busca um único feitiço pelo seu SLUG.
+   * Usa o endpoint /v1/spells/{id}
+   * @param slug O Slug (ex: 'lumos') do feitiço.
+   * @returns Um Observable contendo os dados "desembrulhados" do feitiço.
    */
-  getSpells(term: string = ''): Observable<PotterDbResponse<SpellAttributes>> {
+  getSpellBySlug(slug: string): Observable<PotterDbData<SpellAttributes>> {
+    // A API retorna { "data": {...} } para um único item
+    return this.http.get<{ data: PotterDbData<SpellAttributes> }>(`${this.baseUrl}/spells/${slug}`)
+      .pipe(
+        map(response => response.data) // Extrai o 'data'
+      );
+  }
+
+  /**
+   * Busca a lista curada de feitiços populares usando forkJoin.
+   * @returns Um Observable contendo um ARRAY com os feitiços populares.
+   */
+  getImportantSpells(): Observable<PotterDbData<SpellAttributes>[]> {
+    const requests: Observable<PotterDbData<SpellAttributes>>[] =
+      this.importantSpellSlugs.map(slug => this.getSpellBySlug(slug));
+
+    return forkJoin(requests);
+  }
+
+  /**
+   * Busca feitiços por termo de pesquisa (ou todos, se termo vazio).
+   * Mantém o filtro 'image_not_null'.
+   */
+  searchSpells(term: string = ''): Observable<PotterDbResponse<SpellAttributes>> { // Renomeado de getSpells para clareza
     const params = new URLSearchParams();
     if (term) {
-      params.set('filter[name_cont]', term);
+      params.set('filter[incantation_cont]', term);
     }
-    params.set('filter[image_not_null]', 'true'); // Filtra feitiços sem imagem
-    params.set('page[size]', '30');
+    params.set('filter[image_not_null]', 'true');
+    params.set('page[size]', '30'); // Ou outro tamanho de página
     return this.http.get<PotterDbResponse<SpellAttributes>>(`${this.baseUrl}/spells?${params.toString()}`);
   }
 }

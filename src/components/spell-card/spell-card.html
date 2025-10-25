@@ -1,0 +1,30 @@
+<div class="card h-100">
+  <div *ngIf="spell.attributes.image; else noImage">
+    <img [src]="spell.attributes.image" class="card-img-top" [alt]="spell.attributes.name" />
+  </div>
+  <ng-template #noImage>
+    <div class="card-img-top spell-image-placeholder">
+      <img src="icons/placeholder-hat.svg" class="placeholder-icon" alt="Placeholder" />
+    </div>
+  </ng-template>
+
+  <div class="card-body">
+    <h5 class="card-title">{{ spell.attributes.name }}</h5>
+
+    <div class="spell-details mt-2">
+      <div class="detail-item"><strong>Efeito:</strong> {{ spell.attributes.effect || 'N/A' }}</div>
+      <div *ngIf="spell.attributes.incantation" class="detail-item">
+        <strong>Encantamento:</strong> {{ spell.attributes.incantation }}
+      </div>
+      <div *ngIf="spell.attributes.category" class="detail-item">
+        <strong>Categoria:</strong> {{ spell.attributes.category }}
+      </div>
+      <div class="detail-item">
+        <strong>Criador(a):</strong> {{ spell.attributes.creator || 'Unknown' }}
+      </div>
+      <div *ngIf="spell.attributes.light" class="detail-item">
+        <strong>Cor da Luz:</strong> {{ spell.attributes.light }}
+      </div>
+    </div>
+  </div>
+</div>

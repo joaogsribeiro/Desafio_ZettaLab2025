@@ -42,14 +42,14 @@
 
 // Imagem no topo do card
 .card-img-top {
-  height: 300px; // Altura fixa
+  height: 350px; // Altura fixa
   object-fit: cover; // Preenche sem distorcer
   background-color: theme.$color-dark-bg; // Fundo fallback
 }
 
 // Container do placeholder (quando não há imagem)
 .character-image-placeholder {
-  height: 300px; // Mesma altura da imagem
+  height: 350px; // Mesma altura da imagem
   background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%); 
   display: flex; // Para centralizar o ícone
   align-items: center;
@@ -61,7 +61,7 @@
 // Ícone SVG dentro do placeholder
 .placeholder-icon {
   width: 100%; // Largura flexível
-  max-width: 300px; // Limite
+  max-width: 350px; // Limite
   height: auto; // Proporcional
   opacity: 0.1; // Sutil
   filter: invert(1); // Branco no tema escuro
