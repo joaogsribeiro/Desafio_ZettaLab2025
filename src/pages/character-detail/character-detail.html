@@ -1,1 +1,125 @@
-<p>character-detail works!</p>
+<div class="container character-detail-page">
+  <div *ngIf="isLoading" class="text-center mt-5 mb-5">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p class="mt-2">Carregando Detalhes...</p>
+  </div>
+
+  <div *ngIf="error && !isLoading" class="alert alert-warning mt-4">
+    {{ error }}
+    <div class="mt-3">
+      <a routerLink="/characters" class="btn btn-secondary btn-sm">Voltar para Personagens</a>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !error && character" class="character-content mt-4">
+    <div class="page-title-container mb-4">
+      <img src="icons/title-symbol.svg" alt="" class="title-icon left-icon" />
+      <h1 class="page-title">{{ character.attributes.name }}</h1>
+      <img src="icons/title-symbol.svg" alt="" class="title-icon right-icon" />
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4 text-center">
+        <div class="character-image-container">
+          <div *ngIf="character.attributes.image; else noImage">
+            <img
+              [src]="character.attributes.image"
+              class="img-fluid rounded shadow-sm character-image"
+              [alt]="character.attributes.name"
+            />
+          </div>
+          <ng-template #noImage>
+            <div class="character-image-placeholder rounded shadow-sm">
+              <img src="icons/hat-icon.svg" class="placeholder-icon" alt="Placeholder" />
+            </div>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="character-details-list">
+          <h3 class="details-heading mb-3">Detalhes</h3>
+
+          <dl class="row">
+            <ng-container *ngIf="character.attributes.born">
+              <dt class="col-sm-3">Nascimento</dt>
+              <dd class="col-sm-9">{{ character.attributes.born }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.gender">
+              <dt class="col-sm-3">Gênero</dt>
+              <dd class="col-sm-9">{{ character.attributes.gender }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.species">
+              <dt class="col-sm-3">Espécie</dt>
+              <dd class="col-sm-9">{{ character.attributes.species }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.nationality">
+              <dt class="col-sm-3">Nacionalidade</dt>
+              <dd class="col-sm-9">{{ character.attributes.nationality }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.marital_status">
+              <dt class="col-sm-3">Estado Civil</dt>
+              <dd class="col-sm-9">{{ character.attributes.marital_status }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.blood_status">
+              <dt class="col-sm-3">Status Sanguíneo</dt>
+              <dd class="col-sm-9">{{ character.attributes.blood_status }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.house">
+              <dt class="col-sm-3">Casa</dt>
+              <dd class="col-sm-9">{{ character.attributes.house }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.eye_color">
+              <dt class="col-sm-3">Cor dos Olhos</dt>
+              <dd class="col-sm-9">{{ character.attributes.eye_color }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.hair_color">
+              <dt class="col-sm-3">Cor do Cabelo</dt>
+              <dd class="col-sm-9">{{ character.attributes.hair_color }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.boggart">
+              <dt class="col-sm-3">Bicho-Papão</dt>
+              <dd class="col-sm-9">{{ character.attributes.boggart }}</dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.patronus">
+              <dt class="col-sm-3">Patrono</dt>
+              <dd class="col-sm-9">{{ character.attributes.patronus }}</dd>
+            </ng-container>
+
+            <ng-container
+              *ngIf="character.attributes.wands && character.attributes.wands.length > 0"
+            >
+              <dt class="col-sm-3">Varinha(s)</dt>
+              <dd class="col-sm-9">
+                <ul>
+                  <li *ngFor="let wand of character.attributes.wands">{{ wand }}</li>
+                </ul>
+              </dd>
+            </ng-container>
+
+            <ng-container *ngIf="character.attributes.wiki">
+              <dt class="col-sm-3">Mais Info</dt>
+              <dd class="col-sm-9">
+                <a [href]="character.attributes.wiki" target="_blank" rel="noopener noreferrer">
+                  Ver na Wiki <i class="bi bi-box-arrow-up-right ms-1"></i>
+                </a>
+              </dd>
+            </ng-container>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

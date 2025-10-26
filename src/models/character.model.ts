@@ -24,12 +24,20 @@ export interface CharacterAttributes {
   name: string;
   image: string | null;
   house: string | null;
-  slug: string; // Importante para a busca
+  slug: string;
   born: string | null;
   died: string | null;
   gender: string | null;
   species: string | null;
-  title: string | null;
+  nationality: string | null;
+  marital_status: string | null;
+  blood_status: string | null;
+  eye_color: string | null;
+  hair_color: string | null;
+  boggart: string | null;
+  patronus: string | null;
+  wands: string[] | null;
+  wiki: string | null;
 }
 
 // --- Estruturas Genéricas da API ---

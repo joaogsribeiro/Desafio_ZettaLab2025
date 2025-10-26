@@ -1,0 +1,80 @@
+@use '../../styles.scss' as theme;
+@use "sass:color";
+
+.character-detail-page {
+  // Ajusta a imagem e o placeholder
+  // Container da Imagem (Deve ter tamanho fixo)
+  .character-image-container {
+    width: 100%; // Usar 'width' em vez de 'max-width' para forçar o tamanho
+    height: auto; // Manter altura fixa
+    margin: 0 auto; 
+    overflow: hidden; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+    background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%); // Fundo caso imagem transparente
+  }
+  
+  // Imagem do Personagem (Deve COBRIR o container)
+  .character-image {
+    width: 100%; // Ocupa 100% da largura do container
+    height: 100%; // Ocupa 100% da altura do container
+    border: none; 
+    border-radius: 8px; 
+  }
+  .character-image-placeholder {
+    height: 400px; // Altura fixa para o placeholder
+    background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%);
+    border: 3px solid theme.$color-dark-border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .placeholder-icon {
+      width: 50%;
+      max-width: 400px;
+      height: auto;
+      opacity: 0.1;
+      filter: invert(1);
+    }
+  }
+
+  // Estiliza a lista de detalhes
+  .character-details-list {
+    background-color: theme.$color-dark-card; // Fundo do card para a lista
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid theme.$color-dark-border;
+
+    .details-heading {
+      color: theme.$color-light-text; // Cor de destaque para o subtítulo
+      font-size: 1.5rem;
+      border-bottom: 1px solid theme.$color-dark-border;
+      padding-bottom: 0.5rem;
+    }
+
+    // Lista de definição (dl)
+    dl.row {
+      dt { // Label (col-sm-3)
+        font-weight: 700;
+        color: theme.$color-light-text;
+        padding-bottom: 0.5rem; // Espaço abaixo do label
+      }
+      dd { // Valor (col-sm-9)
+        color: theme.$color-muted-text;
+        padding-bottom: 0.5rem;
+        margin-left: 0; // Reseta margem padrão do dd
+
+        ul { // Estilo para a lista de varinhas
+          padding-left: 1.2rem;
+          margin-bottom: 0;
+          li {
+            margin-bottom: 0.2rem;
+          }
+        }
+        
+        a { // Estilo para o link da wiki
+           font-weight: 500;
+        }
+      }
+    }
+  }
+}
