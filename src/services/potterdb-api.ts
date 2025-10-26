@@ -8,6 +8,7 @@ import { PotterDbData, PotterDbResponse } from '../models/character.model';
 
 // Importa os modelos de atributos específicos
 import { CharacterAttributes } from '../models/character.model';
+import { PotionAttributes } from '../models/potion.model';
 import { SpellAttributes } from '../models/spell.model';
 
 /**
@@ -58,6 +59,16 @@ export class PotterdbApi {
     'killing-curse',
     'cruciatus-curse',
     'imperius-curse'
+  ];
+
+  /**
+   * Lista curada de slugs de poções populares/importantes.
+   * (Exemplos: Polissuco, Felix Felicis, Veritaserum)
+   */
+  private readonly importantPotionSlugs = [
+    'polyjuice-potion',
+    'felix-felicis',
+    'amortentia'
   ];
 
   constructor(private http: HttpClient) { }
@@ -168,5 +179,61 @@ export class PotterdbApi {
     params.set('filter[image_not_null]', 'true');
     params.set('page[size]', '30'); // Ou outro tamanho de página
     return this.http.get<PotterDbResponse<SpellAttributes>>(`${this.baseUrl}/spells?${params.toString()}`);
+  }
+
+  // --- MÉTODOS DE POÇÃO ---
+
+  /**
+   * Busca uma única poção pelo seu SLUG.
+   * Usa o endpoint /v1/potions/{id}
+   * @param slug O Slug da poção (ex: 'polyjuice-potion').
+   * @returns Um Observable contendo os dados "desembrulhados" da poção.
+   */
+  getPotionBySlug(slug: string): Observable<PotterDbData<PotionAttributes>> {
+    // A API retorna { "data": {...} } para um único item
+    return this.http.get<{ data: PotterDbData<PotionAttributes> }>(`${this.baseUrl}/potions/${slug}`)
+      .pipe(
+        map(response => response.data) // Extrai o 'data'
+      );
+  }
+
+  /**
+   * Busca a lista curada de poções populares usando forkJoin.
+   * @returns Um Observable contendo um ARRAY com as poções populares.
+   */
+  getImportantPotions(): Observable<PotterDbData<PotionAttributes>[]> {
+    const requests: Observable<PotterDbData<PotionAttributes>>[] =
+      this.importantPotionSlugs.map(slug => this.getPotionBySlug(slug));
+
+    return forkJoin(requests);
+  }
+
+  /**
+   * Busca poções por termo de pesquisa E/OU por página.
+   * Inclui filtro para trazer apenas resultados com imagem.
+   * @param term O termo de busca (opcional).
+   * @param page O número da página a ser buscada (padrão: 1).
+   * @param pageSize O número de itens por página (padrão: 20).
+   * @returns Um Observable com a resposta padrão da API (paginada).
+   */
+  searchPotions(term: string = '', page: number = 1, pageSize: number = 15): Observable<PotterDbResponse<PotionAttributes>> {
+    const params = new URLSearchParams();
+
+    // Adiciona filtro de nome se houver termo de busca
+    if (term) {
+      params.set('filter[name_cont]', term);
+    }
+
+    // Adiciona filtro para imagem não nula
+    params.set('filter[image_not_null]', 'true');
+
+    // Adiciona parâmetros de paginação
+    params.set('page[number]', page.toString());
+    params.set('page[size]', pageSize.toString());
+
+    const url = `${this.baseUrl}/potions?${params.toString()}`;
+    console.log('Buscando Poções:', url); // Para debug
+
+    return this.http.get<PotterDbResponse<PotionAttributes>>(url);
   }
 }

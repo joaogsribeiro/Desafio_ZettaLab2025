@@ -19,10 +19,6 @@ export class SpellCard {
    * Propriedade de entrada que recebe os dados do feitiço do componente pai.
    */
   @Input() spell!: PotterDbData<SpellAttributes>;
-
-  /**
-   * Caminho para o ícone placeholder padrão para feitiços sem imagem.
-   * Substitua 'wand-icon.svg' pelo nome do ícone que você escolher.
-   */
-  placeholderIconPath = 'icons/wand-icon.svg'; // Exemplo
+  
+  placeholderIconPath = 'icons/wand-icon.svg';
 }

@@ -1,4 +1,14 @@
 <app-header></app-header>
-<main class="main-content container">
-  <router-outlet></router-outlet> </main>
+
+<main class="main-content container"> 
+  <router-outlet></router-outlet> 
+</main>
+
+<button 
+  *ngIf="showBackToTopButton" 
+  class="back-to-top-button btn btn-primary" 
+  (click)="scrollToTop()"
+  aria-label="Voltar ao topo">
+  &#8593; 
+</button>
 <app-footer></app-footer>

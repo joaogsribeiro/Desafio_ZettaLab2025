@@ -1,0 +1,33 @@
+<div class="card h-100">
+  <div *ngIf="potion.attributes.image; else noImage">
+    <img [src]="potion.attributes.image" class="card-img-top" [alt]="potion.attributes.name" />
+  </div>
+  <ng-template #noImage>
+    <div class="card-img-top potion-image-placeholder">
+      <img [src]="placeholderIconPath" class="placeholder-icon" alt="Placeholder" />
+    </div>
+  </ng-template>
+
+  <div class="card-body">
+    <h5 class="card-title">{{ potion.attributes.name }}</h5>
+
+    <div class="potion-details mt-2">
+      <div *ngIf="potion.attributes.effect" class="detail-item">
+        <strong>Efeito:</strong> {{ potion.attributes.effect }}
+      </div>
+      <div *ngIf="potion.attributes.characteristics" class="detail-item">
+        <strong>Características:</strong> {{ potion.attributes.characteristics }}
+      </div>
+
+      <div *ngIf="potion.attributes.side_effects" class="detail-item">
+        <strong>Efeitos Colaterais:</strong> {{ potion.attributes.side_effects }}
+      </div>
+      <div *ngIf="potion.attributes.inventors" class="detail-item">
+        <strong>Inventores:</strong> {{ potion.attributes.inventors }}
+      </div>
+      <div *ngIf="potion.attributes.difficulty" class="detail-item">
+        <strong>Dificuldade:</strong> {{ potion.attributes.difficulty }}
+      </div>
+    </div>
+  </div>
+</div>
