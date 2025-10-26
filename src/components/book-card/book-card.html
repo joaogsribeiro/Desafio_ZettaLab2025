@@ -1,0 +1,42 @@
+<div class="card mb-3 book-card-horizontal">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <div *ngIf="book.attributes.cover; else noCover">
+        <img
+          [src]="book.attributes.cover"
+          class="img-fluid rounded-start card-img-left"
+          [alt]="book.attributes.title"
+        />
+      </div>
+      <ng-template #noCover>
+        <div class="book-image-placeholder rounded-start card-img-left">
+          <img [src]="placeholderIconPath" class="placeholder-icon" alt="Placeholder" />
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.attributes.title }}</h5>
+
+        <div class="book-details mt-2">
+          <p *ngIf="book.attributes.author" class="detail-item mb-1">
+            <strong>Autor:</strong> {{ book.attributes.author }}
+          </p>
+          <p *ngIf="book.attributes.release_date" class="detail-item mb-1">
+            <strong>Lançamento:</strong> {{ book.attributes.release_date | date : 'dd/MM/yyyy' }}
+          </p>
+          <p *ngIf="book.attributes.pages" class="detail-item mb-1">
+            <strong>Páginas:</strong> {{ book.attributes.pages }}
+          </p>
+          <p *ngIf="book.attributes.dedication" class="detail-item mb-1">
+            <strong>Dedicação:</strong> {{ book.attributes.dedication }}
+          </p>
+          <p *ngIf="book.attributes.summary" class="detail-item mt-3">
+            <strong>Resumo:</strong> {{ book.attributes.summary }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

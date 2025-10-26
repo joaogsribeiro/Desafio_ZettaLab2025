@@ -6,6 +6,8 @@ export interface BookAttributes {
   slug: string;
   cover: string | null;
   summary: string | null;
+  author: string | null; // Adicionado
   release_date: string | null;
+  dedication: string | null; // Adicionado
   pages: number | null;
 }

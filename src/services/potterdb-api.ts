@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { PotterDbData, PotterDbResponse } from '../models/character.model';
 
 // Importa os modelos de atributos específicos
+import { BookAttributes } from '../models/book.model';
 import { CharacterAttributes } from '../models/character.model';
 import { PotionAttributes } from '../models/potion.model';
 import { SpellAttributes } from '../models/spell.model';
@@ -235,5 +236,15 @@ export class PotterdbApi {
     console.log('Buscando Poções:', url); // Para debug
 
     return this.http.get<PotterDbResponse<PotionAttributes>>(url);
+  }
+
+  /**
+   * Busca todos os livros.
+   * Não precisa de paginação ou filtros complexos, pois são poucos.
+   * @returns Um Observable com a resposta da API contendo a lista de livros.
+   */
+  getBooks(): Observable<PotterDbResponse<BookAttributes>> {
+    const url = `${this.baseUrl}/books`;
+    return this.http.get<PotterDbResponse<BookAttributes>>(url);
   }
 }

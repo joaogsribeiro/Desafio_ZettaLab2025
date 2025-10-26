@@ -1,0 +1,98 @@
+// Importa variáveis globais e módulo de cor
+@use '../../styles.scss' as theme;
+@use "sass:color";
+
+.book-card-horizontal {
+  background-color: theme.$color-dark-card;
+  border: 1px solid theme.$color-dark-border;
+  overflow: hidden; // Garante que cantos arredondados funcionem na imagem
+
+  .card-img-left {
+    width: 100%; // Ocupa toda a largura disponível na coluna
+    height: auto; // Altura automática para manter proporção
+    object-fit: contain; // Ajusta a imagem dentro do espaço, sem cortar
+  }
+
+  // Estilo para a imagem na coluna da esquerda
+  .card-img-left {
+    width: 100%; // Ocupa toda a largura da coluna (col-md-4)
+    height: 100%; // Ocupa toda a altura do card
+    object-fit: cover; // Cobre o espaço sem distorcer
+  }
+
+  // Placeholder (fundo e ícone)
+  .book-image-placeholder {
+    width: 100%;
+    height: 100%; // Mesma altura da imagem
+    min-height: 250px; // Altura mínima para o placeholder em telas pequenas
+    background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .placeholder-icon {
+      width: 30%; // Ajuste o tamanho do ícone
+      max-width: 60px;
+      height: auto;
+      opacity: 0.1;
+      filter: invert(1);
+    }
+  }
+
+  // Corpo do card (coluna da direita)
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // Tenta ocupar a altura
+
+    .card-title {
+      color: theme.$color-light-text;
+      font-family: theme.$font-headings;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    // Detalhes do livro
+    .book-details {
+      font-size: 0.9rem;
+
+      .detail-item {
+        color: theme.$color-muted-text;
+        line-height: 1.5;
+        margin-bottom: 0.5rem; // Espaço entre os detalhes
+
+        strong {
+          color: theme.$color-light-text;
+          font-weight: 500;
+        }
+      }
+      
+      // Estilo específico para o resumo
+      .summary-text {
+         color: theme.$color-light-text; // Cor principal para o resumo
+      }
+    }
+  }
+
+  // Garante cantos arredondados corretos no Bootstrap 5 para card horizontal
+  // (A imagem só deve ter canto arredondado à esquerda/topo, o corpo à direita/fundo)
+  .rounded-start {
+    border-top-left-radius: var(--bs-card-inner-border-radius) !important;
+    border-bottom-left-radius: var(--bs-card-inner-border-radius) !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+// Em telas pequenas (abaixo de 'md'), a imagem fica no topo
+@media (max-width: 767.98px) {
+  .book-card-horizontal {
+    .card-img-left, .book-image-placeholder {
+       height: 100%; // Altura fixa para a imagem no topo em mobile
+       border-bottom-left-radius: 0 !important; // Remove arredondamento inferior esquerdo
+    }
+    .rounded-start { // Reseta arredondamento geral
+        border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0 !important;
+    }
+  }
+}
