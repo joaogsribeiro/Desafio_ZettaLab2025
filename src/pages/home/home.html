@@ -1,1 +1,102 @@
-<p>home works!</p>
+<div class="container home-page text-center">
+  <section class="logo-section my-5">
+    <img src="images/logo.svg" alt="Lumos Data Logo" class="main-logo img-fluid" />
+  </section>
+
+  <section class="description-section mb-5">
+    <div class="text-box-background p-4 p-md-5 rounded shadow-sm">
+      <h2 class="section-title mb-3">Bem-vindo ao Lumos Data!</h2>
+      <p class="lead">
+        Explore o universo mágico de Harry Potter como nunca antes! Lumos Data é uma aplicação
+        interativa que permite navegar por personagens, feitiços, poções, livros e filmes,
+        utilizando dados da
+        <a href="https://potterdb.com/" target="_blank" rel="noopener noreferrer">PotterDB API</a>.
+      </p>
+      <p>
+        Navegue pelas seções abaixo ou use a busca nas páginas de Personagens, Feitiços e Poções
+        para encontrar informações específicas.
+      </p>
+    </div>
+  </section>
+  <section class="navigation-cards mb-5">
+    <h3 class="section-title mb-4">Explore as Seções</h3>
+    <div class="row justify-content-center g-4">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <a routerLink="/characters" class="nav-card text-decoration-none">
+          <div class="card h-100 nav-card-inner">
+            <div class="nav-card-icon-placeholder">
+              <img src="icons/character-nav-icon.svg" class="card-icon" alt="Personagens" />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Ver Personagens</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <a routerLink="/spells" class="nav-card text-decoration-none">
+          <div class="card h-100 nav-card-inner">
+            <div class="nav-card-icon-placeholder">
+              <img src="icons/wand-icon.svg" class="card-icon" alt="Feitiços" />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Ver Feitiços</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <a routerLink="/potions" class="nav-card text-decoration-none">
+          <div class="card h-100 nav-card-inner">
+            <div class="nav-card-icon-placeholder">
+              <img src="icons/potion-icon.svg" class="card-icon" alt="Poções" />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Ver Poções</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <a routerLink="/books" class="nav-card text-decoration-none">
+          <div class="card h-100 nav-card-inner">
+            <div class="nav-card-icon-placeholder">
+              <img src="icons/book-nav-icon.svg" class="card-icon" alt="Livros" />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Ver Livros</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+        <a routerLink="/movies" class="nav-card text-decoration-none">
+          <div class="card h-100 nav-card-inner">
+            <div class="nav-card-icon-placeholder">
+              <img src="icons/movie-nav-icon.svg" class="card-icon" alt="Filmes" />
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title mb-0">Ver Filmes</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="challenge-info mb-5">
+    <div class="text-box-background p-4 p-md-5 rounded shadow-sm">
+      <h3 class="section-title mb-3">Sobre Este Projeto</h3>
+      <p>
+        Esta aplicação foi desenvolvida como parte do Desafio de Desenvolvimento de Software da 2ª
+        edição do programa <strong>Zetta Lab 2025</strong>. O objetivo foi criar uma aplicação
+        responsiva consumindo uma API pública, demonstrando habilidades em front-end, organização de
+        código e boas práticas de desenvolvimento. Agradeço à <strong>Agência Zetta</strong> por
+        essa oportunidade!
+      </p>
+    </div>
+  </section>
+</div>
