@@ -89,6 +89,19 @@ a {
   letter-spacing: 2px;
   font-weight: 500; // Peso normal
   line-height: 1.2;
+  text-align: center;
+}
+
+.page-subtitle{
+  font-family: $font-headings;
+  color: $color-light-text; // Ajustado para branco
+  font-size: 1.8rem; // Tamanho principal
+  margin: 0 0.3rem; // Espaço para ícones
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500; // Peso normal
+  line-height: 1.2;
+  text-align: center;
 }
 
 // Ícones decorativos ao lado do título
@@ -205,3 +218,35 @@ app-header, app-footer {
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+// Ajustes responsivos para telas menores (mobile)
+@media (max-width: 767.98px) {
+  
+  // (Ajustes anteriores para .home-page, etc., se existirem)
+
+  // AJUSTE 1: Reduzir tamanho dos títulos principais e subtítulos
+  .page-title {
+    font-size: 1.8rem; // Tamanho menor para mobile (ajuste conforme necessário)
+    margin: 0 0.5rem; // Reduz o espaço lateral para os ícones
+    letter-spacing: 1px; // Diminui o espaçamento entre letras
+  }
+
+  .page-subtitle {
+    font-size: 1.4rem;
+  }
+
+  // AJUSTE 2: Garantir centralização e ajustar ícones do título/subtítulo
+  .page-title-container {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .title-icon {
+    height: 25px; // Ícone principal um pouco menor
+  }
+  .subtitle-icon {
+    height: 18px; // Ícone do subtítulo menor ainda
+  }
+
+  // (Outros ajustes responsivos que você já tenha feito)
+  // Ex: .character-detail-page, .home-page .navigation-cards etc.
+} // Fim da @media query
