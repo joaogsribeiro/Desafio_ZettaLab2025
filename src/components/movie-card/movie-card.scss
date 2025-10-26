@@ -1,0 +1,92 @@
+// Importa variáveis globais e módulo de cor
+@use '../../styles.scss' as theme;
+@use "sass:color";
+
+// Classe principal para o card de filme horizontal
+.movie-card-horizontal {
+  background-color: theme.$color-dark-card;
+  border: 1px solid theme.$color-dark-border;
+  overflow: hidden; // Garante que cantos arredondados funcionem na imagem
+
+  // Estilo para a imagem/poster na coluna da esquerda
+  .card-img-left {
+    width: 100%; // Ocupa toda a largura da coluna (col-md-4)
+    height: auto; // Tenta ocupar toda a altura do card (verticalmente)
+    object-fit: cover; // Cobre o espaço sem distorcer (mantém o estilo do book-card)
+  }
+
+  // Placeholder (fundo e ícone)
+  .movie-image-placeholder {
+    width: 100%;
+    height: 100%; // Mesma altura da imagem
+    min-height: 250px; // Altura mínima para o placeholder em telas pequenas
+    background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .placeholder-icon {
+      width: 30%; // Mesmo tamanho do ícone do book-card
+      max-width: 60px;
+      height: auto;
+      opacity: 0.1;
+      filter: invert(1);
+    }
+  }
+
+  // Corpo do card (coluna da direita)
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; // Tenta ocupar a altura
+
+    .card-title {
+      color: theme.$color-light-text;
+      font-family: theme.$font-headings;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    // Detalhes do filme
+    .movie-details { // Nome da classe pode ser genérico ou específico
+      font-size: 0.9rem;
+
+      .detail-item {
+        color: theme.$color-muted-text;
+        line-height: 1.5;
+        margin-bottom: 0.5rem; // Espaço entre os detalhes
+
+        strong {
+          color: theme.$color-light-text;
+          font-weight: 500;
+        }
+      }
+
+      // Estilo específico para o resumo
+      .summary-text {
+         color: theme.$color-light-text; // Cor principal para o resumo
+      }
+    }
+  }
+
+  // Garante cantos arredondados corretos (igual book-card)
+  .rounded-start {
+    border-top-left-radius: var(--bs-card-inner-border-radius) !important;
+    border-bottom-left-radius: var(--bs-card-inner-border-radius) !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+
+// Estilos responsivos para telas pequenas (igual book-card)
+@media (max-width: 767.98px) {
+  .movie-card-horizontal {
+    .card-img-left, .movie-image-placeholder {
+       height: 100%; // Altura fixa para a imagem no topo em mobile (igual book-card corrigido)
+       border-bottom-left-radius: 0 !important;
+    }
+    .rounded-start {
+        border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0 !important;
+    }
+  }
+}

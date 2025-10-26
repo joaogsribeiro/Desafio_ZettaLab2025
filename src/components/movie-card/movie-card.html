@@ -1,0 +1,45 @@
+<div class="card mb-3 movie-card-horizontal">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <div *ngIf="movie.attributes.poster; else noPoster">
+        <img
+          [src]="movie.attributes.poster"
+          class="img-fluid rounded-start card-img-left"
+          [alt]="movie.attributes.title"
+        />
+      </div>
+      <ng-template #noPoster>
+        <div class="movie-image-placeholder rounded-start card-img-left">
+          <img [src]="placeholderIconPath" class="placeholder-icon" alt="Placeholder" />
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.attributes.title }}</h5>
+
+        <div class="movie-details mt-2">
+          <p *ngIf="movie.attributes.release_date" class="detail-item mb-1">
+            <strong>Lançamento:</strong> {{ movie.attributes.release_date | date : 'dd/MM/yyyy' }}
+          </p>
+          <p *ngIf="movie.attributes.running_time" class="detail-item mb-1">
+            <strong>Duração:</strong> {{ movie.attributes.running_time }}
+          </p>
+          <p *ngIf="directorsList" class="detail-item mb-1">
+            <strong>Diretor(es):</strong> {{ directorsList }}
+          </p>
+          <p *ngIf="movie.attributes.box_office" class="detail-item mb-1">
+            <strong>Bilheteria:</strong> {{ movie.attributes.box_office }}
+          </p>
+           <p *ngIf="movie.attributes.budget" class="detail-item mb-1">
+            <strong>Orçamento:</strong> {{ movie.attributes.budget }}
+          </p>
+          <p *ngIf="movie.attributes.summary" class="detail-item mt-3">
+            <strong>Resumo:</strong> {{ movie.attributes.summary }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

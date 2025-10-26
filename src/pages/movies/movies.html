@@ -1,1 +1,28 @@
-<p>movies works!</p>
+<div class="container">
+  <div class="page-title-container mb-4">
+    <img src="icons/title-symbol.svg" alt="" class="title-icon left-icon" />
+    <h1 class="page-title">Filmes</h1>
+    <img src="icons/title-symbol.svg" alt="" class="title-icon right-icon" />
+  </div>
+
+  <div *ngIf="isLoading" class="text-center mt-5 mb-5">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p class="mt-2">Carregando Filmes...</p>
+  </div>
+
+  <div *ngIf="error && !isLoading" class="alert alert-warning mt-4">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!isLoading && !error" class="movie-list-container">
+    <div *ngIf="movies.length === 0" class="alert alert-info">Nenhum filme encontrado.</div>
+
+    <div class="row justify-content-center">
+      <div *ngFor="let movie of movies" class="col-12 col-md-10 col-lg-10">
+        <app-movie-card [movie]="movie"></app-movie-card>
+      </div>
+    </div>
+  </div>
+</div>

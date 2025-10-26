@@ -9,6 +9,7 @@ import { PotterDbData, PotterDbResponse } from '../models/character.model';
 // Importa os modelos de atributos específicos
 import { BookAttributes } from '../models/book.model';
 import { CharacterAttributes } from '../models/character.model';
+import { MovieAttributes } from '../models/movie.model';
 import { PotionAttributes } from '../models/potion.model';
 import { SpellAttributes } from '../models/spell.model';
 
@@ -238,6 +239,8 @@ export class PotterdbApi {
     return this.http.get<PotterDbResponse<PotionAttributes>>(url);
   }
 
+  // --- MÉTODO DE LIVROS  ---
+
   /**
    * Busca todos os livros.
    * Não precisa de paginação ou filtros complexos, pois são poucos.
@@ -246,5 +249,18 @@ export class PotterdbApi {
   getBooks(): Observable<PotterDbResponse<BookAttributes>> {
     const url = `${this.baseUrl}/books`;
     return this.http.get<PotterDbResponse<BookAttributes>>(url);
+  }
+
+  // --- MÉTODO DE FILMES  ---
+
+  /**
+   * Busca todos os filmes.
+   * Não precisa de paginação ou filtros complexos.
+   * @returns Um Observable com a resposta da API contendo a lista de filmes.
+   */
+  getMovies(): Observable<PotterDbResponse<MovieAttributes>> {
+    const url = `${this.baseUrl}/movies`;
+    // Usa o endpoint /v1/movies
+    return this.http.get<PotterDbResponse<MovieAttributes>>(url);
   }
 }
