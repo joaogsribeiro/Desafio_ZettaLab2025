@@ -37,11 +37,11 @@ export class PotterdbApi {
     'severus-snape',
     'minerva-mcgonagall',
     'rubeus-hagrid',
-    'tom-riddle', // Slug correto para Voldemort (como Tom Riddle)
+    'tom-riddle',
     'draco-malfoy',
     'sirius-black',
     'remus-lupin',
-    'ginevra-weasley' // Slug correto para Ginny
+    'ginevra-weasley'
   ];
 
   /**
@@ -234,7 +234,6 @@ export class PotterdbApi {
     params.set('page[size]', pageSize.toString());
 
     const url = `${this.baseUrl}/potions?${params.toString()}`;
-    console.log('Buscando Poções:', url); // Para debug
 
     return this.http.get<PotterDbResponse<PotionAttributes>>(url);
   }

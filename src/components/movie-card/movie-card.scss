@@ -69,7 +69,7 @@
     }
   }
 
-  // Garante cantos arredondados corretos (igual book-card)
+  // Garante cantos arredondados corretos 
   .rounded-start {
     border-top-left-radius: var(--bs-card-inner-border-radius) !important;
     border-bottom-left-radius: var(--bs-card-inner-border-radius) !important;
@@ -78,11 +78,11 @@
   }
 }
 
-// Estilos responsivos para telas pequenas (igual book-card)
+// Estilos responsivos para telas pequenas 
 @media (max-width: 767.98px) {
   .movie-card-horizontal {
     .card-img-left, .movie-image-placeholder {
-       height: 100%; // Altura fixa para a imagem no topo em mobile (igual book-card corrigido)
+       height: 100%; // Altura fixa para a imagem no topo em mobile
        border-bottom-left-radius: 0 !important;
     }
     .rounded-start {

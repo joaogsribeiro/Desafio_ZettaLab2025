@@ -2,60 +2,58 @@
 @use '../../styles.scss' as theme;
 @use "sass:color";
 
-// Estilos específicos para a página Home
+/* Define estilos específicos para a página Home */
 .home-page {
-  padding-top: 1rem; // Espaçamento superior
-  padding-bottom: 1rem; // Espaçamento inferior
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-  // Seção da Logo
+  /* Estiliza a seção da logo principal */
   .logo-section {
     .main-logo {
-      max-width: 80%; // Largura máxima da logo
-      height: auto;   // Proporcional
-      max-height: 250px; // Altura máxima
+      max-width: 80%;
+      height: auto;
+      max-height: 250px;
       margin-bottom: 2rem;
     }
   }
 
-  // Seções de Texto (Descrição e Sobre)
+  /* Define a largura máxima para as seções de texto */
   .description-section, .challenge-info {
-    max-width: 1080px; // Largura máxima do container de texto
+    max-width: 1080px;
     margin-left: auto;
-    margin-right: auto; // Centraliza o container
+    margin-right: auto;
   }
 
-  // ESTILO ADICIONADO: Caixa de fundo para o texto
+  /* Estiliza a caixa com fundo para as seções de texto */
   .text-box-background {
-    background-color: rgba(theme.$color-dark-card, 0.75); // Fundo escuro (card) com leve transparência
-    border: 1px solid theme.$color-dark-border; // Borda sutil
-    border-radius: 8px; // Usa a variável de borda arredondada do Bootstrap (se disponível) ou 8px
-    padding: 1.5rem 2rem; // Padding interno (ajuste se necessário, pode usar p-4/p-md-5 do HTML também)
-    margin-bottom: 3rem; // Espaço abaixo da caixa
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); // Sombra sutil
+    background-color: rgba(theme.$color-dark-card, 0.75); // Fundo semi-transparente
+    border: 1px solid theme.$color-dark-border;
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 
-    // Garante que os parágrafos dentro tenham cor clara
+    /* Estilos para parágrafos dentro da caixa */
     p {
       font-size: 1rem;
       line-height: 1.7;
-      color: theme.$color-muted-text; // Texto claro principal dentro da caixa
+      color: theme.$color-muted-text;
 
-      // Parágrafo introdutório
-      &.lead {
-        font-size: 1rem; // Ajustado para corresponder ao original
+      &.lead { // Parágrafo de destaque
+        font-size: 1rem;
         font-weight: 400;
         color: theme.$color-light-text;
       }
-      // Texto em negrito
-      strong {
-        color: theme.$color-light-text; // Garante cor clara
+      strong { // Texto em negrito
+        color: theme.$color-light-text;
         font-weight: 500;
       }
     }
 
-    // Título dentro da caixa
+    /* Estilo para títulos dentro da caixa */
     .section-title {
-      color: theme.$color-light-text; // Mantém dourado
-      font-family: theme.$font-headings; // Fonte Cinzel
+      color: theme.$color-light-text;
+      font-family: theme.$font-headings;
       font-size: 1.4rem;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
@@ -63,67 +61,69 @@
     }
   }
 
-  // Seção dos Cards de Navegação
+  /* Estiliza a seção dos cards de navegação */
   .navigation-cards {
-    margin-top: 4rem; // Espaço acima dos cards
+    margin-top: 4rem;
     margin-bottom: 4rem;
 
-    // Título "Explore as Seções"
+    /* Estilo do título da seção */
     .section-title {
-       font-family: theme.$font-headings; // Fonte Cinzel
-       color: theme.$color-hufflepuff; // Cor dourada
-       font-size: 1.8rem; // Tamanho
-       margin-bottom: 1.5rem; // Espaço abaixo
+       font-family: theme.$font-headings;
+       color: theme.$color-hufflepuff; // Cor de destaque
+       font-size: 1.8rem;
+       margin-bottom: 1.5rem;
        text-transform: uppercase;
        letter-spacing: 1px;
     }
 
-    // Link que envolve o card
+    /* Estilo do link que envolve o card (para hover e clique) */
     .nav-card {
-      display: block; // Garante que o link ocupe o espaço da coluna
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: block;
+      transition: transform 0.2s ease, box-shadow 0.2s ease; // Animação hover
 
       &:hover {
         transform: translateY(-8px); // Efeito levantar
-        box-shadow: 0 6px 20px rgba(theme.$color-gryffindor, 0.25); // Sombra dourada
+        box-shadow: 0 6px 20px rgba(theme.$color-gryffindor, 0.25); // Sombra temática
       }
 
-      // Estilo interno do card de navegação
+      /* Estilo visual do card de navegação */
       .nav-card-inner {
-        background-color: theme.$color-dark-card; // Fundo escuro
-        border: 1px solid theme.$color-dark-border; // Borda
-        border-radius: 8px; // Cantos
-        height: 100%; // Altura total
-        overflow: hidden; // Previne estouro do placeholder
+        background-color: theme.$color-dark-card;
+        border: 1px solid theme.$color-dark-border;
+        border-radius: 8px;
+        height: 100%; // Garante altura uniforme
+        overflow: hidden;
 
-        // Placeholder para o ícone (topo do card)
+        /* Container para o ícone no topo do card */
         .nav-card-icon-placeholder {
-           height: 180px; // Altura fixa para o espaço do ícone
-           background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%); // Fundo
+           height: 180px; // Altura do espaço do ícone
+           background-color: color.adjust(theme.$color-dark-bg, $lightness: 3%);
            display: flex;
            align-items: center;
            justify-content: center;
-           border-bottom: 1px solid theme.$color-dark-border; // Linha abaixo do ícone
+           border-bottom: 1px solid theme.$color-dark-border;
         }
 
-        .card-icon { // Estilo da imagem do ícone
+        /* Estilo da imagem do ícone */
+        .card-icon {
           width: 70%;
-          max-width: 180px; // Tamanho máximo do ícone
+          max-width: 180px;
           height: auto;
-          opacity: 0.3; // Opacidade do ícone
-          filter: invert(1); // Branco
+          opacity: 0.3;
+          filter: invert(1); // Ícone branco
         }
 
-        // Corpo do card (apenas o título agora)
+        /* Área do texto (título) no card */
         .card-body {
-           padding: 1rem 0.5rem; // Padding vertical/horizontal
+           padding: 1rem 0.5rem;
         }
 
-        .card-title { // Título dentro do card
-          font-family: theme.$font-headings; // Fonte Cinzel
-          font-size: 1rem; // Tamanho
-          color: theme.$color-light-text; // Cor clara
-          font-weight: 500; // Peso
+        /* Texto do título no card */
+        .card-title {
+          font-family: theme.$font-headings;
+          font-size: 1rem;
+          color: theme.$color-light-text;
+          font-weight: 500;
           margin-bottom: 0;
         }
       }
@@ -131,23 +131,27 @@
   }
 }
 
-// Ajustes responsivos
+/* Ajustes responsivos para telas menores */
 @media (max-width: 767.98px) {
   .home-page {
+    /* Ajusta tamanho da logo */
     .logo-section .main-logo {
-      max-height: 180px; // Logo menor
+      max-height: 180px;
     }
+    /* Ajusta tamanho dos títulos de seção */
     .section-title {
-      font-size: 1.5rem; // Títulos menores
+      font-size: 1.5rem;
     }
+    /* Ajusta padding e fontes nas caixas de texto */
     .text-box-background {
-       padding: 1rem 1.5rem; // Menos padding
-       p { font-size: 1rem; } // Texto menor
+       padding: 1rem 1.5rem;
+       p { font-size: 1rem; }
        p.lead { font-size: 1.1rem; }
     }
+    /* Ajusta layout dos cards de navegação */
     .navigation-cards .nav-card .nav-card-inner {
-       .nav-card-icon-placeholder { height: 280px; } // Placeholder menor
-       .card-icon { max-width: 280px; width: 50%;} // Ícone menor
+       .nav-card-icon-placeholder { height: 120px; } // Reduzido placeholder
+       .card-icon { max-width: 80px; width: 50%; } // Reduzido ícone
        .card-body { padding: 0.75rem 0.5rem; }
        .card-title { font-size: 0.9rem; }
     }

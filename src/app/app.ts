@@ -11,7 +11,7 @@ import { Header } from '../layout/header/header';
   selector: 'app-root',
   standalone: true, 
   imports: [
-    CommonModule, // Adicione CommonModule aqui
+    CommonModule,
     RouterOutlet, 
     Header,       
     Footer        
@@ -30,7 +30,7 @@ export class App {
    * @HostListener: Escuta o evento 'scroll' no objeto 'window'.
    * Atualiza a visibilidade do botão com base na posição do scroll.
    */
-  @HostListener('window:scroll', []) // Não precisamos do $event aqui
+  @HostListener('window:scroll', [])
   onWindowScroll(): void {
     // Define a quantidade de pixels que o usuário precisa rolar para o botão aparecer
     const scrollOffset = 2000; 

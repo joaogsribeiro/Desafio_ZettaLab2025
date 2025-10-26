@@ -22,7 +22,6 @@ export class PotionCard {
 
   /**
    * Caminho para o ícone placeholder padrão para poções sem imagem.
-   * Substitua 'potion-icon.svg' pelo nome do ícone que você escolher.
    */
-  placeholderIconPath = 'icons/potion-icon.svg'; // Exemplo
+  placeholderIconPath = 'icons/potion-icon.svg';
 }

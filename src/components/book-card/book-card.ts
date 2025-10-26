@@ -19,5 +19,5 @@ export class BookCard {
    * Propriedade de entrada que recebe os dados do livro do componente pai.
    */
   @Input() book!: PotterDbData<BookAttributes>;
-  placeholderIconPath = 'icons/book-icon.svg'; // Exemplo
+  placeholderIconPath = 'icons/book-icon.svg';
 }

@@ -14,7 +14,6 @@
 
   &:hover {
     transform: translateY(-5px);
-    // Sombra diferente para poções? Ex: Slytherin (verde)
     box-shadow: 0 4px 15px rgba(theme.$color-slytherin, 0.3);
   }
 
@@ -51,7 +50,7 @@
 
 // Imagem no topo do card
 .card-img-top {
-  height: 300px; // Altura (pode ajustar)
+  height: 300px; // Altura
   object-fit: cover;
   background-color: theme.$color-dark-bg;
 }

@@ -1,41 +1,41 @@
-@use 'sass:color'; // Importa módulo SASS para manipulação de cores
+// Importa módulos SASS necessários
+@use 'sass:color';
 
 /* ========================================
-   1. Fontes Externas
+   1. Importações de Fontes Externas
    ======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&display=swap');
 
 /* ========================================
-   2. Variáveis Globais (Guia de Estilo)
+   2. Variáveis Globais (Define o Tema)
    ======================================== */
-// -- Paleta de Cores --
+// -- Paleta de Cores (Tema Escuro) --
 $color-gryffindor: #740001;
 $color-slytherin: #1a472a;
 $color-ravenclaw: #0e1a40;
 $color-hufflepuff: #ffd800; // Cor de destaque
-$color-dark-bg: #141414;     // Fundo principal
-$color-dark-card: #1f1f1f;   // Fundo de elementos
-$color-dark-border: #333;    // Bordas
-$color-light-text: #f0f0f0;  // Texto principal
-$color-muted-text: #aaa;      // Texto secundário
+$color-dark-bg: #141414;
+$color-dark-card: #1f1f1f;
+$color-dark-border: #333;
+$color-light-text: #f0f0f0;
+$color-muted-text: #aaa;
 
 // -- Tipografia --
-$font-headings: 'Cinzel', serif; // Fonte para títulos
-$font-body: 'Lexend', sans-serif;      // Fonte para corpo
+$font-headings: 'Cinzel', serif; // Fonte títulos
+$font-body: 'Lexend', sans-serif; // Fonte corpo
 
 /* ========================================
-   3. Estilos Globais Base
+   3. Estilos Globais Base da Aplicação
    ======================================== */
 body {
-  // Configuração do fundo parallax
-  background-image: url('/images/background.jpg'); // Relativo à pasta 'public'
+  // Configura fundo parallax e estilos de texto padrão
+  background-image: url('/images/background.jpg');
   background-attachment: fixed;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
-  // Estilos base
   background-color: $color-dark-bg; // Fallback
   color: $color-light-text;
   font-family: $font-body;
@@ -45,9 +45,9 @@ body {
 body::before {
   content: '';
   position: fixed;
-  inset: 0; // Equivalente a top/left/right/bottom: 0
-  background-color: rgba(20, 20, 20, 0.85); // Ajuste a opacidade
-  z-index: -1; // Atrás do conteúdo
+  inset: 0;
+  background-color: rgba(20, 20, 20, 0.85);
+  z-index: -1;
 }
 
 // Estilo padrão para títulos
@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 
 // Estilo padrão para links
 a {
-  color: $color-hufflepuff; // Cor de destaque
+  color: $color-hufflepuff;
   text-decoration: none;
   transition: color 0.2s ease;
   &:hover {
@@ -68,9 +68,9 @@ a {
 }
 
 /* ========================================
-   4. Estilo Títulos de Página (com Ícones)
+   4. Estilo Títulos de Página Temáticos (com Ícones)
    ======================================== */
-// Container flexível para centralizar título e ícones
+// Container para centralizar título e ícones decorativos
 .page-title-container {
   display: flex;
   align-items: center;
@@ -79,41 +79,42 @@ a {
   margin-bottom: 2rem;
 }
 
-// Texto do título principal/subtítulo
+// Estilo do texto do título (h1)
 .page-title {
   font-family: $font-headings;
-  color: $color-light-text; // Ajustado para branco
-  font-size: 2.5rem; // Tamanho principal
-  margin: 0 0.3rem; // Espaço para ícones
+  color: $color-light-text;
+  font-size: 2.5rem;
+  margin: 0 0.3rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 500; // Peso normal
+  font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }
 
-.page-subtitle{
+// Estilo do texto do subtítulo (h2)
+.page-subtitle { // Usado em home.html, characters.html, etc.
   font-family: $font-headings;
-  color: $color-light-text; // Ajustado para branco
-  font-size: 1.8rem; // Tamanho principal
-  margin: 0 0.3rem; // Espaço para ícones
+  color: $color-light-text;
+  font-size: 1.8rem; // Menor que .page-title
+  margin: 0 0.3rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  font-weight: 500; // Peso normal
+  font-weight: 500;
   line-height: 1.2;
   text-align: center;
 }
 
-// Ícones decorativos ao lado do título
-.title-icon {
+// Estilo dos ícones decorativos
+.title-icon { // Ícones do título principal
   height: 35px;
   width: auto;
-  margin-top: -5px; // Ajuste vertical
+  margin-top: -5px;
   opacity: 0.7;
   filter: invert(1); // Branco
 }
-.subtitle-icon { // Ícones menores para subtítulos
-  height: 21px;
+.subtitle-icon { // Ícones do subtítulo
+  height: 21px; // Menores
   width: auto;
   margin-top: -5px;
   opacity: 0.7;
@@ -123,48 +124,42 @@ a {
 /* ========================================
    5. Sobrescrita Estilos Bootstrap
    ======================================== */
-// Botão Primário (Tema Gryffindor)
-.btn-primary { 
+// Personaliza botão primário
+.btn-primary {
   background-color: $color-gryffindor;
-  border-color: color.adjust($color-gryffindor, $lightness: -10%); 
+  border-color: color.adjust($color-gryffindor, $lightness: -10%);
   color: $color-light-text;
   font-weight: 500;
   transition: all 0.2s ease;
   &:hover {
-    background-color: color.adjust($color-gryffindor, $lightness: 10%); 
+    background-color: color.adjust($color-gryffindor, $lightness: 10%);
     border-color: $color-gryffindor;
     transform: translateY(-2px);
   }
 }
 
-// Campo de Input (Tema Escuro)
-// ... (rest of your styles.scss)
-
-.form-control { // Input escuro
+// Personaliza campo de input com ícone
+.form-control {
   font-size: 1rem;
   background-color: color.adjust($color-dark-bg, $lightness: 5%);
   border-color: $color-dark-border;
-  color: $color-light-text; // Icon will inherit this light color
-
-  // --- Ícone no Input ---
-  background-image: url('/icons/search-icon.svg'); // Path to your SVG in public/icons
+  color: $color-light-text;
+  // Configuração do ícone de busca
+  background-image: url('/icons/search-icon.svg');
   background-repeat: no-repeat;
-  background-position: left 15px center; // Position from left, centered vertically
-  background-size: 16px 16px; // Size of the icon
-  padding-left: 40px; // Space for the icon + padding
-  // --- Fim do Ícone ---
+  background-position: left 15px center;
+  background-size: 16px 16px;
+  padding-left: 40px; // Espaço para o ícone
 
   &::placeholder {
     color: $color-muted-text;
     font-size: 1rem;
-    // Adjust placeholder padding if needed, relative to the main padding-left
-    // padding-left: 5px; 
   }
 
   &:focus {
     background-color: color.adjust($color-dark-bg, $lightness: 10%);
-    border-color: $color-gryffindor;
-    color: $color-light-text; // Icon color remains light on focus
+    border-color: $color-gryffindor; // Destaque ao focar
+    color: $color-light-text;
     box-shadow: 0 0 0 0.25rem rgba($color-gryffindor, 0.25);
   }
 }
@@ -172,41 +167,39 @@ a {
 /* ========================================
    6. Sobrescrita Alertas Bootstrap
    ======================================== */
+// Personaliza alertas para tema escuro
 .alert {
-  // Estilo base para todos os alertas no tema escuro
   background-color: $color-dark-card;
   border-color: $color-dark-border;
   color: $color-muted-text;
 
-  // Estilo para alert-info e alert-warning
+  // Adiciona destaque lateral para info/warning
   &.alert-info, &.alert-warning {
     border-left: 4px solid $color-gryffindor;
     color: $color-light-text;
   }
-
 }
 
 /* ========================================
-   Sticky Footer (Correção de Posição)
+   7. Layout Sticky Footer
    ======================================== */
-
-// Aplica ao container raiz da aplicação Angular
+// Garante que o footer fique no fim da página
 app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-
-// Estilo para o container principal do conteúdo
-.main-content {
-  flex-grow: 1; 
+.main-content { // Ocupa o espaço entre header e footer
+  flex-grow: 1;
+}
+app-header, app-footer { // Evita encolhimento
+  flex-shrink: 0;
 }
 
-// Garante que header e footer não encolham
-app-header, app-footer {
-  flex-shrink: 0; 
-}
-
+/* ========================================
+   8. Botão Voltar ao Topo
+   ======================================== */
+// Estilo do botão flutuante
 .back-to-top-button {
   position: fixed;
   bottom: 20px;
@@ -215,38 +208,32 @@ app-header, app-footer {
   padding: 0.5rem 0.8rem;
   font-size: 1.2rem;
   line-height: 1;
-  border-radius: 50%;
+  border-radius: 50%; // Redondo
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  // Cor primária definida pela classe .btn-primary no HTML
 }
 
-// Ajustes responsivos para telas menores (mobile)
+/* ========================================
+   9. Ajustes Responsivos (Mobile)
+   ======================================== */
+// Estilos aplicados apenas em telas menores que 768px
 @media (max-width: 767.98px) {
-  
-  // (Ajustes anteriores para .home-page, etc., se existirem)
 
-  // AJUSTE 1: Reduzir tamanho dos títulos principais e subtítulos
+  // Reduz tamanho de títulos e ícones
   .page-title {
-    font-size: 1.8rem; // Tamanho menor para mobile (ajuste conforme necessário)
-    margin: 0 0.5rem; // Reduz o espaço lateral para os ícones
-    letter-spacing: 1px; // Diminui o espaçamento entre letras
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+    letter-spacing: 1px;
   }
-
   .page-subtitle {
     font-size: 1.4rem;
   }
-
-  // AJUSTE 2: Garantir centralização e ajustar ícones do título/subtítulo
   .page-title-container {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
-  .title-icon {
-    height: 25px; // Ícone principal um pouco menor
-  }
-  .subtitle-icon {
-    height: 18px; // Ícone do subtítulo menor ainda
-  }
+  .title-icon { height: 25px; }
+  .subtitle-icon { height: 18px; }
 
-  // (Outros ajustes responsivos que você já tenha feito)
-  // Ex: .character-detail-page, .home-page .navigation-cards etc.
-} // Fim da @media query
+  // Outros ajustes responsivos específicos podem ser adicionados aqui
+}

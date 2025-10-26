@@ -22,9 +22,8 @@ export class MovieCard {
 
   /**
    * Caminho para o ícone placeholder padrão para filmes sem poster.
-   * Substitua 'movie-icon.svg' pelo nome do ícone que você escolher.
    */
-  placeholderIconPath = 'icons/movie-icon.svg'; // Exemplo
+  placeholderIconPath = 'icons/movie-icon.svg';
 
   /**
    * Formata a lista de diretores em uma string separada por vírgulas.

@@ -63,9 +63,8 @@ export class Potions implements OnInit {
         this.popularPotions = potionsArray;
         // Não desliga o isLoadingInitial ainda, espera a primeira página carregar
       },
-      error: (err) => {
+      error: (_err) => {
         // Erro ao carregar populares não impede carregar a lista principal
-        console.error('Erro loadImportantPotions:', err);
         this.error = 'Falha ao carregar poções populares.';
       }
     });
@@ -123,9 +122,8 @@ export class Potions implements OnInit {
              this.error = `Nenhuma poção encontrada para "${searchTerm}".`;
           }
         },
-        error: (err) => {
+        error: (_err) => {
           this.error = 'Falha ao carregar poções.';
-          console.error('Erro searchPotions:', err);
         }
       });
   }
@@ -176,7 +174,7 @@ export class Potions implements OnInit {
    * @param event - O objeto do evento de scroll (necessário por causa do ['$event'])
    */
   @HostListener('window:scroll', ['$event'])
-  onWindowScroll(event: Event): void { // <-- ADICIONE O PARÂMETRO 'event: Event' AQUI
+  onWindowScroll(event: Event): void {
     const threshold = 100;
     const position = window.innerHeight + window.scrollY;
     const height = document.body.offsetHeight;

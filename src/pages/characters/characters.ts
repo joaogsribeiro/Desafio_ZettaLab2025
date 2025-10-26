@@ -50,10 +50,9 @@ export class Characters implements OnInit {
         this.initialCharacters = charactersArray;
         this.isLoading = false;
       },
-      error: (err) => {
+      error: (_err) => {
         this.error = 'Falha ao carregar personagens principais.';
         this.isLoading = false;
-        console.error('Erro loadInitialCharacters:', err);
       }
     });
   }
@@ -89,10 +88,9 @@ export class Characters implements OnInit {
         }
         this.isLoading = false; // Desativa loading após processar
       },
-      error: (err) => { // Tratamento de erro geral da API
+      error: (_err) => { // Tratamento de erro geral da API
         this.error = 'Falha ao realizar a busca na API.';
         this.isLoading = false;
-        console.error('Erro setupSearchListener (Characters):', err);
       }
     });
   }

@@ -56,10 +56,9 @@ export class Movies implements OnInit {
         }
         this.isLoading = false; // Desativa loading
       },
-      error: (err: HttpErrorResponse | any) => { // Tipo explícito
+      error: (_err: HttpErrorResponse | any) => { // Tipo explícito
         this.error = 'Falha ao carregar os filmes.';
         this.isLoading = false;
-        console.error('Erro ao buscar filmes:', err.message || err);
       }
     });
   }

@@ -42,11 +42,9 @@ export class Books implements OnInit {
         this.isLoading = false;
       },
       // Adiciona o tipo explícito para 'err' (pode ser any ou HttpErrorResponse)
-      error: (err: HttpErrorResponse | any) => {
+      error: (_err: HttpErrorResponse | any) => {
         this.error = 'Falha ao carregar os livros.';
         this.isLoading = false;
-        // É útil logar o erro real para depuração
-        console.error('Erro ao buscar livros:', err.message || err);
       }
     });
   }

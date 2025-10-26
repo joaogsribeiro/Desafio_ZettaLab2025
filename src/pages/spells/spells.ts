@@ -14,12 +14,11 @@ import { PotterdbApi } from '../../services/potterdb-api';
 @Component({
   selector: 'app-spells',
   standalone: true,
-  imports: [ CommonModule, ReactiveFormsModule, SpellCard ],
+  imports: [CommonModule, ReactiveFormsModule, SpellCard],
   templateUrl: './spells.html',
-  styleUrl: './spells.scss'
+  styleUrl: './spells.scss',
 })
 export class Spells implements OnInit {
-
   // --- Estado da UI ---
   public isLoading = true;
   public error: string | null = null;
@@ -36,7 +35,7 @@ export class Spells implements OnInit {
   constructor(private potterdbApi: PotterdbApi) {}
 
   ngOnInit(): void {
-    this.loadInitialSpells();    // Carrega a lista curada
+    this.loadInitialSpells(); // Carrega a lista curada
     this.setupSearchListener(); // Configura a busca
   }
 
@@ -56,8 +55,7 @@ export class Spells implements OnInit {
       error: (err) => {
         this.error = 'Falha ao carregar feitiços populares.';
         this.isLoading = false;
-        console.error('Erro loadInitialSpells:', err);
-      }
+      },
     });
   }
 
@@ -65,36 +63,38 @@ export class Spells implements OnInit {
    * Configura o listener da barra de busca para chamar searchSpells.
    */
   setupSearchListener(): void {
-    this.searchControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      tap(term => { // Atualiza estado da UI
-        this.isSearching = !!term;
-        this.isLoading = !!term;
-        this.error = null;
-        if (!term) this.searchedSpells = [];
-      }),
-      // Chama searchSpells (renomeado no serviço)
-      switchMap(term => (term ? this.potterdbApi.searchSpells(term) : []))
-    ).subscribe({
-      next: (response) => {
-        if (this.isSearching && response.data) {
-          this.searchedSpells = response.data;
-        } else if (this.isSearching && !response.data) {
-           // Caso a busca retorne algo inesperado sem 'data'
-           this.searchedSpells = [];
-        }
-        // Verifica se a busca (com termo) não retornou resultados
-        if (this.isSearching && this.searchedSpells.length === 0 && this.searchControl.value) {
-           this.error = `Nenhum feitiço encontrado para "${this.searchControl.value}".`;
-        }
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.error = 'Falha ao realizar a busca por feitiços.';
-        this.isLoading = false;
-        console.error('Erro setupSearchListener (Spells):', err);
-      }
-    });
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        tap((term) => {
+          // Atualiza estado da UI
+          this.isSearching = !!term;
+          this.isLoading = !!term;
+          this.error = null;
+          if (!term) this.searchedSpells = [];
+        }),
+        // Chama searchSpells (renomeado no serviço)
+        switchMap((term) => (term ? this.potterdbApi.searchSpells(term) : []))
+      )
+      .subscribe({
+        next: (response) => {
+          if (this.isSearching && response.data) {
+            this.searchedSpells = response.data;
+          } else if (this.isSearching && !response.data) {
+            // Caso a busca retorne algo inesperado sem 'data'
+            this.searchedSpells = [];
+          }
+          // Verifica se a busca (com termo) não retornou resultados
+          if (this.isSearching && this.searchedSpells.length === 0 && this.searchControl.value) {
+            this.error = `Nenhum feitiço encontrado para "${this.searchControl.value}".`;
+          }
+          this.isLoading = false;
+        },
+        error: (_err) => {
+          this.error = 'Falha ao realizar a busca por feitiços.';
+          this.isLoading = false;
+        },
+      });
   }
 }
