@@ -42,7 +42,7 @@ O desenvolvimento focou em:
     * Cards horizontais (imagem à esquerda, texto à direita) para Livros e Filmes, otimizados para exibir mais conteúdo textual.
 * **Detalhes do Personagem:** Página dedicada (`/character/:id`) exibindo informações completas de um personagem selecionado.
 * **Tema Visual:** Interface escura com fundo parallax, fontes temáticas (Cinzel, Lexend), cores inspiradas no universo HP e títulos decorados.
-* [cite_start]**Responsividade:** Layout adaptado para diferentes tamanhos de tela (mobile, tablet, desktop), seguindo os breakpoints sugeridos [cite: 16-19].
+* **Responsividade:** Layout adaptado para diferentes tamanhos de tela (mobile, tablet, desktop), seguindo os breakpoints sugeridos [cite: 16-19].
 * **Utilidades:** Botão flutuante "Voltar ao Topo".
 
 ---
@@ -53,10 +53,9 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente de de
 
 1.  **Clone o Repositório:**
     ```bash
-    git clone [https://github.com/joaogsribeiro/Desafio_ZettaLab2025.git](https://github.com/joaogsribeiro/Desafio_ZettaLab2025.git) 
+    git clone https://github.com/joaogsribeiro/Desafio_ZettaLab2025.git
     ```
-    *(Substitua pela URL correta do seu repo, se diferente)*
-
+    
 2.  **Navegue até a Pasta:**
     ```bash
     cd Desafio_ZettaLab2025
@@ -79,7 +78,7 @@ Siga os passos abaixo para configurar e executar o projeto em seu ambiente de de
 
 ## 📝 Licença
 
-Este projeto é distribuído sob a Licença MIT. Veja o arquivo `LICENSE` para mais detalhes (se você adicionar um).
+Este projeto é distribuído sob a Licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ---
 
